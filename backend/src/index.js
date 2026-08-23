@@ -9,6 +9,7 @@ import User from "./models/user.model.js";
 import { connectDB } from "./lib/db.js"
 import job from "./lib/cron.js";
 import clerkWebhook from "./webhook/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js";
 dotenv.config()
 const app=express()
 
@@ -26,6 +27,9 @@ app.use(clerkMiddleware());
 app.get("/health",(req,res)=>{
     res.status(200).json({ok:true});
 });
+
+app.use("/api/routes",authRoutes)
+
 
 //if the public directory exists,serve the static files
 // thios is for the production build
