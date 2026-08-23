@@ -4,9 +4,9 @@
 # Produces static HTML/JS/CSS under frontend/dist.
 FROM node:22-bookworm-slim AS frontend-build
 WORKDIR /app/frontend
-COPY frontend/package.json frontend/package-lock.json ./
+COPY frontend/vite-project/package.json frontend/vite-project/package-lock.json ./
 RUN npm install --no-audit --no-fund --legacy-peer-deps
-COPY frontend/ ./
+COPY frontend/vite-project/ ./
 # Empty = browser calls /api on the same host as the page.
 ENV VITE_API_URL=
 # Public Clerk key is embedded in client JS.
