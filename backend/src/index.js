@@ -11,8 +11,9 @@ import job from "./lib/cron.js";
 import clerkWebhook from "./webhook/clerk.webhook.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import { app,server } from "./lib/socket.js";
 dotenv.config()
-const app=express()
+
 
 const PORT=process.env.PORT;
 const FRONTEND_URL=process.env.FRONTEND_URL;
@@ -42,7 +43,7 @@ if(fs.existsSync(publicDir)){
     })
 }
 
-app.listen(3000,()=> {
+server.listen(3000,()=> {
     connectDB();
     console.log("Server is running at port:",PORT)
 
