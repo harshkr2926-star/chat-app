@@ -10,6 +10,7 @@ import { connectDB } from "./lib/db.js"
 import job from "./lib/cron.js";
 import clerkWebhook from "./webhook/clerk.webhook.js";
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 dotenv.config()
 const app=express()
 
@@ -29,6 +30,7 @@ app.get("/health",(req,res)=>{
 });
 
 app.use("/api/routes",authRoutes)
+app.use("/api/messages",messageRoutes);
 
 
 //if the public directory exists,serve the static files
