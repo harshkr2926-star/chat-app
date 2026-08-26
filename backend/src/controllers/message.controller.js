@@ -1,12 +1,13 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
+import { hasImageKitConfig, uploadChatMedia } from "../lib/imagekit.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export async function getUsersForSidebar(req, res) {
   try {
     const loggedInUserId = req.user._id;
 
-    const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-clerkId");
+    const filteredUsers = await User.find({}).select("-clerkId");
 
     res.status(200).json(filteredUsers);
   } catch (error) {
@@ -65,7 +66,6 @@ export async function getMessages(req, res) {
     res.status(500).json({ message: "Internal server error" });
   }
 }
-
 
 export async function sendMessage(req, res) {
   try {

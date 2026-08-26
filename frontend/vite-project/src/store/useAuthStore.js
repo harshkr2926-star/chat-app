@@ -26,13 +26,13 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  clearAuth: () => {     // use when user is logged out
+  clearAuth: () => {
     set({ authUser: null, isCheckingAuth: false, onlineUsers: [] });
     get().disconnectSocket();
   },
 
   connectSocket: (user) => {
-    if (!user || get().socket?.connected) return;  // if user is undefined or user is already connected to socket then return.
+    if (!user || get().socket?.connected) return;
 
     const socket = io(BASE_URL, { query: { userId: user._id } });
 
